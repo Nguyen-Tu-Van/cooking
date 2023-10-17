@@ -18,7 +18,6 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        $this->menu('dashboard','dashboard');
         $firestore = new FirestoreClient(['projectId' => 'cooking-89482']);
         $users = $firestore->collection('users')->documents();
         $users_arr = [];
@@ -55,9 +54,9 @@ class DashboardController extends Controller
             //     echo '----------------------<br>';
             // }
             array_push($orders_arr, $params);
-            if($params['order']['orderStatus'] == 'Đang duyệt') $status1++;
-            if($params['order']['orderStatus'] == 'Đã duyệt') $status2++;
-            if($params['order']['orderStatus'] == 'Đã hủy') $status3++;
+            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đang duyệt') $status1++;
+            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã duyệt') $status2++;
+            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã hủy') $status3++;
             if(isset($params['order']['payment']) && $params['order']['payment'] == 1) $money1+=$params['order']['amount'];
             if(isset($params['order']['payment']) && $params['order']['payment'] == 1 && $currentDateTime == convert_date_3($params['order']['time_payment'])) $money2+=$params['order']['amount'];
             if(isset($params['order']['payment']) && $params['order']['payment'] == 1 && $currentDateTime2 == convert_date_3_month($params['order']['time_payment'])) $money3+=$params['order']['amount'];
