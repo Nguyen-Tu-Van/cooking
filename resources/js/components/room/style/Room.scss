@@ -1,0 +1,14 @@
+.room:hover{
+    .breadcrumb-elements-item{
+        display: inline-block !important;
+    }
+}
+.note-editable{
+    min-height: auto !important;
+}
+.note-editor{
+    margin-bottom: 2px;
+}
+.list-icons-item:hover{
+    transform: scale(1.2);
+}

@@ -1,0 +1,16 @@
+.nav-item-submenu>.nav-link-none:after {
+    opacity: 0;
+  }
+  .nav-item {
+    cursor: pointer;
+  }
+
+.sidebar-light .icon-transmission{
+  color: black;
+}
+.sidebar-light .icon-cross2{
+  color: black;
+}
+.custom-control-input:disabled~.custom-control-label, .custom-control-input[disabled]~.custom-control-label {
+  color: black !important;
+}

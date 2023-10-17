@@ -1,0 +1,28 @@
+.answer{
+    cursor: pointer;
+    margin: 5px;
+    border-radius : 5px;
+    border: 1px solid transparent !important;
+}
+.answer:hover{
+    border: 1px solid #2196F3 !important;
+}
+.card-left{
+    background-color: black;
+}
+.card-left .card-title{
+    color: white;
+}
+.card-left .card-header{
+    border-bottom:1px solid gainsboro;
+}
+
+.answer-stick {
+    animation-name: example;
+    animation-duration: 2s;
+  }
+  
+  @keyframes example {
+    from {background-color: #4A5AB9;}
+    to {background-color: white;}
+  }
