@@ -59,8 +59,7 @@
 							<th>Thông tin khách</th>
 							<th>Tổng tiền</th>
 							<th data-breakpoints="xs sm md">Trạng thái</th>
-							<th data-breakpoints="xs sm">HDV</th>
-							<th data-breakpoints="xs sm">Địa điểm tour</th>
+							<th data-breakpoints="xs sm">Món ăn</th>
 							<th data-breakpoints="xs sm">Thông tin chi tiết</th>
 							<th data-breakpoints="xs sm" class="text-center" style="width: 30px;"><i class="icon-menu-open2"></i></th>
 						</tr>
@@ -76,29 +75,18 @@
 							</td>
 							<td>{{number_format($order['order']['amount'], 0, ',', '.')}} vnđ</td>
 							<td  class="text-center">
-								@if($order['order']['orderStatus'] == 'Đang duyệt')
+								@if($order['order']['orderStatus'] == 'Đang giao')
 									<span class="badge badge-light">{{$order['order']['orderStatus']}}</span>
-								@elseif($order['order']['orderStatus'] == 'Đã duyệt')
+								@elseif($order['order']['orderStatus'] == 'Đã giao')
 									<span class="badge badge-success">{{$order['order']['orderStatus']}}</span>
 								@else
 									<span class="badge badge-danger">{{$order['order']['orderStatus']}}</span>
 								@endif
 								<br>
-								@if($order['order']['orderStatus'] == 'Đang duyệt')
+								@if($order['order']['orderStatus'] == 'Đang giao')
 									<a href="{{route('approve',$order['id'])}}" class="btn btn-indigo btn-sm mt-1 p-1 pt-0 pb-0">Duyệt</a>&nbsp;
 									<a href="{{route('remove',$order['id'])}}" class="btn btn-dark btn-sm mt-1 p-1 pt-0 pb-0">Hủy</a>&nbsp;
 								@endif
-							</td>
-							<td>
-								@foreach($order['hostOrder'] as $hdv)
-								@php
-									try {
-										echo $employye_arr[$hdv]['name'].'<br>';
-									} catch (\Exception $e) {
-										echo 'Admin'.'<br>';
-									}
-								@endphp
-								@endforeach
 							</td>
 							<td>
 								@foreach($order['order']['products'] as $address)
@@ -107,35 +95,20 @@
 										<img width="80" src="{{$address['imageUrl']}}" /> 
 									</div>
 									<div style="display: flex;align-items: center;">
-										{{$address['title']}} - giá {{number_format($address['price'], 0, ',', '.')}} vnđ x {{$order['order']['numberPeople']}}
+										{{$address['title']}} - giá {{number_format($address['price'], 0, ',', '.')}} vnđ x {{$address['quantity']}}
 									</div>
 								</div>
 								@endforeach
-								@if(!empty($order['order']['address']))
-									<span class="badge badge-secondary">Tour tự set</span>
-								@endif
 								@if(!empty($order['order']['place']))
 								<br>
 									<span class="badge badge-secondary">Nơi khởi hành : {{$order['order']['place']}}</span>
 								@endif
 							</td>
 							<td>
-								Ngày đặt : {{convert_date_2($order['order']['dateTime'])}}<br>
-								Ngày đi : {{convert_date_2($order['order']['startDate'])}}<br>
-								Ngày về : {{convert_date_2($order['order']['endDate'])}} @if($order['order']['endDate']=="") {{$order['order']['time']}} @endif<br>
-								Số người : {{$order['order']['numberPeople']}}
-								@if($order['order']['room'] == 1 ) <span class="badge badge-light"> Phòng đơn</span> 
-								@else <span class="badge badge-teal">Phòng nhóm</span> 
-								@endif
-								<br>
-								@if(isset($order['order']['payment']) && $order['order']['payment'] == 1 ) 
-									<span class="badge badge-success mt-1">Thanh toán lúc {{convert_date($order['order']['time_payment'])}}</span> 
-								@else <span class="badge badge-danger mt-1"> Chưa thanh toán</span> 
-								@endif
+								<span class="badge badge-success mt-1">Thanh toán lúc {{convert_date($order['order']['time_payment'])}}</span> 
 							</td>
 							<td class="text-right">
 								<div class="btn-group">
-									<a class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#modal_show" onclick="showInfoTour(`{{convert_date_2($order['order']['startDate'])}}`,`{{convert_date_2($order['order']['endDate'])}}`,{{$order['order']['numberPeople']}},{{$order['order']['room']}},`{{$order['id']}}`,{{$order['order']['payment']??0}})"><i class="icon-pencil"></i></a>&nbsp;
 									<form action="{{route('orders.destroy',$order['id'])}}" method="post">
 									@csrf
 									@method('DELETE')
