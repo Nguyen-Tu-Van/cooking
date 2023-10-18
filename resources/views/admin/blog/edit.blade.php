@@ -103,6 +103,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Nguyên liệu <span class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="5" name="ingredient">{{$tour['ingredient']??''}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Mô tả món ăn <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">
                                     <textarea class="form-control" rows="5" name="description">{{$tour['description']}}</textarea>
@@ -119,18 +125,18 @@
                         <div class="text-center">
                             <button type="submit" class="btn btn-success"><i class="icon-arrow-right15"></i> Cập nhật</button>
                         </div>
-                        <hr>
-                        <h5 class="card-title">Nội dung bình luận</h5>
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2" style="font-weight: bold !important;"> Email <span class="text-danger"></span></label>
-                            <label class="col-form-label col-lg-9" style="font-weight: bold !important;">
-                                Nội dung bình luận
-                            </label>
-                            <label class="col-form-label col-lg-1" style="font-weight: bold !important;">
-                                Xóa
-                            </label>
-                        </div>
                         @if(isset($comment_arr[$id]))
+                            <hr>
+                            <h5 class="card-title">Nội dung bình luận</h5>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2" style="font-weight: bold !important;"> Email <span class="text-danger"></span></label>
+                                <label class="col-form-label col-lg-9" style="font-weight: bold !important;">
+                                    Nội dung bình luận
+                                </label>
+                                <label class="col-form-label col-lg-1" style="font-weight: bold !important;">
+                                    Xóa
+                                </label>
+                            </div>
                             @foreach($comment_arr[$id]['comment'] as $key => $item)
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2"> {{$users_arr[$item['userCommentId']]['email']}} <span class="text-danger"></span></label>
@@ -148,7 +154,50 @@
                                 </label>
                             </div>
                             @endforeach
-                            @endif
+                        @endif
+                        <hr>
+                        <h5 class="card-title">Danh sách report</h5>
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2" style="font-weight: bold !important;"> Email <span class="text-danger"></span></label>
+                            <label class="col-form-label col-lg-5" style="font-weight: bold !important;">
+                                Nội dung report
+                            </label>
+                            <label class="col-form-label col-lg-3" style="font-weight: bold !important;">
+                                Trạng thái
+                            </label>
+                            <label class="col-form-label col-lg-2" style="font-weight: bold !important;">
+                                Duyệt
+                            </label>
+                        </div>
+                        @foreach($tour['reports'] as $key => $item)
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2"> {{$item['email']}}</label>
+                            <label class="col-form-label col-lg-5">
+                                {{$item['content']}}
+                            </label>
+                            <label class="col-form-label col-lg-3">
+                                @if($item['status']==0)
+                                    <span class="text-danger">Đã từ chối report</span>
+                                @elseif($item['status']==1)
+                                    <span class="text-success">Chấp nhận report</span>
+                                @else  
+                                    <span class="">Chờ duyệt</span>
+                                @endif
+                            </label>
+                            <label class="col-form-label col-lg-2">
+                                @if($item['status']==2)
+                                    <div class="btn-group">
+                                        <a href="{{route('update_status',[$id,$key,0])}}" class="btn btn-danger btn-icon btn-sm" style="width: 100px;"><i class="icon-close2">Từ chối</i></a>
+                                        <a href="{{route('update_status',[$id,$key,1])}}" class="btn btn-success btn-icon btn-sm" style="width: 100px;"><i class="icon-ticket">Chấp nhận</i></a>
+                                    </div>
+                                @else 
+                                    <div class="btn-group">
+                                        <a href="{{route('update_status',[$id,$key,2])}}" class="btn btn-light btn-icon btn-sm" style="width: 120px;"><i class="icon-undo">Chờ duyệt</i></a>
+                                    </div>
+                                @endif
+                            </label>
+                        </div>
+                        @endforeach
                     </form>
                 </div>
             </div>

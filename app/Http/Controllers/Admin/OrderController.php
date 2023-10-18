@@ -26,34 +26,34 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $this->menu('order','orders');
-
         $orders = $this->firestore->collection('orders')->documents();
         $users = $this->firestore->collection('users')->documents();
-        $employees = $this->firestore->collection('employees')->documents();
         $users_arr = [];
         foreach ($users as $user) {
             $users_arr[$user->id()] = $user->data();
         }
-        $employye_arr = [];
-        foreach ($employees as $employye) {
-            $employye_arr[$employye->id()] = $employye->data();
-        }
-        // return $users_arr;
 
         $orders_arr = [];
+        $money1 = 0;
+        $orders_arr2 = [];
         foreach ($orders as $order) {
             $params = $order->data();
             $params['id'] = $order->id();
             $params['user'] = $users_arr[$order->data()['userOrder']];
             array_push($orders_arr, $params);
+            if($request->has('date') && $request->date == convert_date_3($params['order']['time_payment']))
+            {
+                array_push($orders_arr2, $params);
+                $money1+=$params['order']['amount'];
+            }
         }
 
         return view('admin.order.order',[
             'orders' => collect($orders_arr),
-            'employye_arr' => $employye_arr
+            'money' => $money1,
+            'orders1'=> collect($orders_arr2)
         ]);
     }
 
@@ -200,7 +200,7 @@ class OrderController extends Controller
         $collection = $this->firestore->collection('orders')->document($id);
         $order = $collection->snapshot()->data();
         // Thêm tài liệu mới với dữ liệu vào collection "users".
-        $order['order']['orderStatus'] = 'Đã duyệt';
+        $order['order']['orderStatus'] = 'Đã giao';
         $collection->set([
             'order' => $order['order']
         ], ['merge' => true]);

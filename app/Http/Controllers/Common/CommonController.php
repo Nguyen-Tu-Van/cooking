@@ -414,8 +414,6 @@ class CommonController extends Controller
                'sdt' => $request->sdt,
                'startDate' => $request->startDate,
                'ten' => $request->ten,
-               'time' => $request->time,
-               'place' => $request->place
             ],
             'userOrder' => Session::get('user')['userId']
         ];

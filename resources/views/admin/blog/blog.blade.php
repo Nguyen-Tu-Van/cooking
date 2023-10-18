@@ -52,6 +52,7 @@
 							<th>Tên món ăn</th>
 							<th data-breakpoints="xs sm md">Giá</th>
 							<th data-breakpoints="xs sm">Mô tả món ăn</th>
+							<th data-breakpoints="xs sm">Nguyên liệu</th>
 							<th data-breakpoints="xs sm" class="text-center" style="width: 30px;">Thao tác</th>
 						</tr>
 					</thead>
@@ -71,7 +72,12 @@
 								<b>Thể loại</b> : {{$tour['type']}}
 							</td>
 							<td style="width:150px">{{number_format($tour['price'], 0, ',', '.')}} vnđ</td>
-							<td style="text-align: justify;">{{$tour['description']}}</td>
+							<td style="text-align: justify;">
+								<textarea class="form-control" rows="5" name="description" readonly>{{$tour['description']}}</textarea>
+							</td>
+							<td style="text-align: justify;">
+								<textarea class="form-control" style="width:200px" rows="5" name="ingredient" readonly>{{$tour['ingredient']}}</textarea>
+							</td>
 							<td class="text-center">
 								<div class="btn-group">
 									<a href="{{route('foods.edit',$tour['id'])}}" class="btn btn-light btn-icon btn-sm"><i class="icon-pencil3"></i></a>&nbsp;

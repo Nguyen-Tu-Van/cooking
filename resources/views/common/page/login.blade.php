@@ -19,7 +19,7 @@
 	<div class="content-inner">
 
 		<!-- Content area -->
-		<div class="content d-flex justify-content-center align-items-center">
+		<div class="content d-flex justify-content-center align-items-center" style="background:url('https://www.simplyrecipes.com/thmb/DJp2s4GDwu1W-ZZKAD_uyYQMzew=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-A-A-guide-cooking-terms-11451db934b94e66852c335e5d240539.jpg')">
 
 			<!-- Login card -->
 			<form class="login-form form-validate wmin-sm-400" action="{{route('login-post')}}" method="post">
@@ -46,24 +46,25 @@
 				@endif
 
 				<div class="card mb-0">
-					<div class="card-body">
-						<div class="text-center mb-3">
-							<i class="icon-reading icon-2x text-secondary border-secondary border-3 rounded-pill p-3 mb-3 mt-1"></i>
-							<h5 class="mb-0">Login to your account</h5>
+					<div class="card-body" style="background:url('https://www.simplyrecipes.com/thmb/DJp2s4GDwu1W-ZZKAD_uyYQMzew=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-A-A-guide-cooking-terms-11451db934b94e66852c335e5d240539.jpg')">
+						<div class="text-center mb-3" style="margin: 0 auto; width: 50%;">
+							<a>
+								<img style="width:100%" src="https://i.pinimg.com/originals/24/bd/b9/24bdb963b911fc0e2768bffe888ab175.gif" />
+							</a>
 							<!-- <span class="d-block text-muted">Your credentials</span> -->
 						</div>
 
 						<div class="form-group form-group-feedback form-group-feedback-left">
-							<input type="email" class="form-control" name="email" placeholder="Email" required @if(Cookie::has("email_cookie_user")) value="{{Cookie::get('email_cookie_user')}}" @endif>
+							<input type="email" class="form-control" name="email" placeholder="Enter Email" required @if(Cookie::has("email_cookie_user")) value="{{Cookie::get('email_cookie_user')}}" @endif>
 							<div class="form-control-feedback">
-								<i class="icon-user text-muted"></i>
+								<!-- <i class="icon-user text-muted"></i> -->
 							</div>
 						</div>
 
 						<div class="form-group form-group-feedback form-group-feedback-left input-group">
-							<input type="password" class="form-control" name="password" id="password" @if(Cookie::has("password_cookie_user")) value="{{Cookie::get('password_cookie_user')}}" @endif placeholder="Password" required>
+							<input type="password" class="form-control" name="password" id="password" @if(Cookie::has("password_cookie_user")) value="{{Cookie::get('password_cookie_user')}}" @endif placeholder="Enter Password" required>
 							<div class="form-control-feedback">
-								<i class="icon-lock2 text-muted"></i>
+								<!-- <i class="icon-lock2 text-muted"></i> -->
 							</div>
 							<div class="input-group-append">
 								<div class="input-group-text">

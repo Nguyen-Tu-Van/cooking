@@ -44,7 +44,15 @@
 			<!-- Table with togglable columns -->
 			<div class="card">
 				<div class="card-header">
-					<h1 class="card-title float-left">Danh sách đơn đặt hàng</h1>
+					@if(isset($_GET['date']))
+						<h1 class="card-title float-left">Doanh thu {{$_GET['date']}} là {{number_format($money, 0, ',', '.')}} vnđ</h1>
+					@else
+						<h1 class="card-title float-left">Danh sách đơn đặt hàng</h1>
+					@endif
+					<form class="float-right" style="display: flex;" action="{{route('orders.index')}}" method="get">
+						<input type="date" class="form-control mr-2" name="date" value="{{$_GET['date']??''}}">
+						<button type="submit" class="btn btn-primary btn-sm" style="width:120px"><i class="icon-filter3"></i> Filter</button>
+					</form>
 					<!-- <a href="{{route('foods.create')}}" class="btn btn-primary btn-sm float-right"><i class="icon-plus22"></i> Add</a> -->
 				</div>
 
@@ -65,6 +73,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						@php
+							if(isset($_GET['date']))
+							{
+								$orders = $orders1;
+							}
+						@endphp
 						@foreach($orders as $key => $order)
 						<tr>
 							<td class="text-center">{{$key+1}}</td>
@@ -99,10 +113,6 @@
 									</div>
 								</div>
 								@endforeach
-								@if(!empty($order['order']['place']))
-								<br>
-									<span class="badge badge-secondary">Nơi khởi hành : {{$order['order']['place']}}</span>
-								@endif
 							</td>
 							<td>
 								<span class="badge badge-success mt-1">Thanh toán lúc {{convert_date($order['order']['time_payment'])}}</span> 

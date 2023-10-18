@@ -106,6 +106,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Nguyên liệu <span class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="5" name="ingredient">{{old('ingredient')??''}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Mô tả món ăn <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">
                                     <textarea class="form-control" rows="5" name="description">{{old('description')??''}}</textarea>

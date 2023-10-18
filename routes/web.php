@@ -66,6 +66,8 @@ Route::group(['middleware'=>'checkLoginUser'], function(){
     Route::post('orders/update', 'Admin\OrderController@updateOrder')->name('update');
 
     Route::delete('/comment/{blog_id}/{commentid}', 'Admin\BlogController@remove')->name('remove_comment');
+
+    Route::get('/foods/{id}/{index}/{status}', 'Admin\BlogController@updateStatus')->name('update_status');
 });
 // Route::get('/firebase', 'FirebaseController@getData');
 

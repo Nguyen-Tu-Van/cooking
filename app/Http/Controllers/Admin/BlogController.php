@@ -91,6 +91,7 @@ class BlogController extends Controller
             'imageUrl' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'ingredient' => 'required'
         ]);
         $comments = $this->firestore->collection('commentProducts');
         $comment = $comments->add(["comment"=>[]]);
@@ -107,6 +108,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'imageUrl' => $request->imageUrl,
             'price' => (int)$request->price,
+            'ingredient' => $request->ingredient
         ];
         // Thêm tài liệu mới với dữ liệu vào collection "products".
         $products->add($params);
@@ -180,6 +182,7 @@ class BlogController extends Controller
             'imageUrl' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'ingredient' => 'required'
         ]);
         $collection = $this->firestore->collection('products')->document($id);
         $params = [
@@ -189,9 +192,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'imageUrl' => $request->imageUrl,
             'price' => (int)$request->price,
-            'schedule' => $request->schedule,
-            'place' => $request->place,
-            'time' => $request->time
+            'ingredient' => $request->ingredient
         ];
         // Thêm tài liệu mới với dữ liệu vào collection "products".
         $collection->set($params, ['merge' => true]);
@@ -223,6 +224,22 @@ class BlogController extends Controller
             'comment' => $arr_comment
         ];
         $commentProducts->set($params, ['merge' => true]);
+        return redirect()->back()->with('success','Success');
+    }
+    public function updateStatus($blog_id,$index,$status)
+    {
+        $collection = $this->firestore->collection('products')->document($blog_id);
+        // Thêm tài liệu mới với dữ liệu vào collection "products".
+        $arr_comment = [];
+        foreach($collection->snapshot()->data()['reports'] as $key => $item)
+        {
+            array_push($arr_comment,$item);
+        }
+        $arr_comment[$index]['status'] = $status;
+        $collection->set([
+            'reports' => $arr_comment
+        ], ['merge' => true]);
+
         return redirect()->back()->with('success','Success');
     }
 }
