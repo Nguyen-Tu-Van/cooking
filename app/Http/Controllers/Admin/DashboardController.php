@@ -54,8 +54,8 @@ class DashboardController extends Controller
             //     echo '----------------------<br>';
             // }
             array_push($orders_arr, $params);
-            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đang duyệt') $status1++;
-            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã duyệt') $status2++;
+            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đang giao') $status1++;
+            if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã giao') $status2++;
             if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã hủy') $status3++;
             if(isset($params['order']['payment']) && $params['order']['payment'] == 1) $money1+=$params['order']['amount'];
             if(isset($params['order']['payment']) && $params['order']['payment'] == 1 && $currentDateTime == convert_date_3($params['order']['time_payment'])) $money2+=$params['order']['amount'];

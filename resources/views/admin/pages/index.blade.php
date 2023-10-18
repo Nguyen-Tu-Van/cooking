@@ -149,7 +149,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-sm-6 col-xl-4 p-3">
+				<div class="col-sm-6 col-xl-6 p-3">
 					<div class="card card-body bg-light text-black has-bg-image">
 						<div class="media">
 							<div class="media-body">
@@ -164,7 +164,7 @@
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-xl-4 p-3">
+				<div class="col-sm-6 col-xl-6 p-3">
 					<div class="card card-body bg-light text-black has-bg-image">
 						<div class="media">
 							<div class="media-body">
@@ -178,7 +178,7 @@
 					</div>
 				</div>
 
-                <div class="col-sm-6 col-xl-4 p-3">
+                <!-- <div class="col-sm-6 col-xl-4 p-3">
 					<div class="card card-body bg-light text-black has-bg-image">
 						<div class="media">
 							<div class="media-body">
@@ -191,7 +191,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- /simple statistics -->
