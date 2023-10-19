@@ -235,11 +235,26 @@ class BlogController extends Controller
         {
             array_push($arr_comment,$item);
         }
-        $arr_comment[$index]['status'] = $status;
+        $arr_comment[$index]['status'] = (int)$status;
         $collection->set([
             'reports' => $arr_comment
         ], ['merge' => true]);
 
         return redirect()->back()->with('success','Success');
+    }
+
+    public function report()
+    {
+        $collection = $this->firestore->collection('products')->documents();
+        $products = [];
+        foreach ($collection as $document) {
+            $params = $document->data();
+            $params['id'] = $document->id();
+            array_push($products, $params);
+        }
+
+        return view('admin.blog.report',[
+            'products' => $products
+        ]);
     }
 }

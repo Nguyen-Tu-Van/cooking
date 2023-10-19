@@ -44,6 +44,19 @@
         <!-- User menu -->
         <img class="sidebar-section sidebar-user my-1" src="https://freegifimg.com/download/cooks-and-chefs/68293-cook-and-chef-gif-file-hd.gif">
         <!-- /user menu -->
+        <div class="collapse show" id="sidebar-light-buttons-tile">
+            <div class="sidebar-section-body">
+                <div class="row row-tile no-gutters">
+                    <div class="col-12">
+                        <a href="{{route('report')}}" class="btn btn-light btn-block btn-float m-0">
+                            <i class="icon-google-drive text-primary"></i>
+                            <span>Report</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- /sidebar content -->
