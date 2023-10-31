@@ -57,18 +57,6 @@
 					@else
 						<h1 class="card-title float-left">Danh sách đơn đặt hàng</h1>
 					@endif
-					<select class="form-control mr-2" name="type" id="callFood" onChange="callFood()" style="width:auto;float: right;">
-						<option>Chọn món ăn </option>
-						@foreach($foods as $tour)
-							<option value="{{$tour['title']}}" @if(isset($_GET['callFood']) && $_GET['callFood']==$tour['title']) selected @endif>{{$tour['title']}}</option>
-						@endforeach
-					</select>
-					<select class="form-control mr-2" name="type" id="callUser" onChange="callUser()" style="width:auto;float: right;">
-						<option>Chọn user </option>
-						@foreach($users as $user)
-							<option value="{{$user['userId']}}" @if(isset($_GET['callUser']) && $_GET['callUser']==$user['userId']) selected @endif>{{$user['email']}}</option>
-						@endforeach
-					</select>
 					<!-- <a href="{{route('foods.create')}}" class="btn btn-primary btn-sm float-right"><i class="icon-plus22"></i> Add</a> -->
 				</div>
 				<div style="display: flex;">
@@ -84,6 +72,18 @@
 						<input type="text" class="form-control mr-2" id="yearInput" name="year" pattern="[0-9]{4}" placeholder="yyyy" value="{{$_GET['year']??''}}">
 						<button type="submit" class="btn btn-primary btn-sm mt-2" style="width:120px"><i class="icon-filter3"></i> Filter</button>
 					</form>
+					<select class="form-control ml-2" name="type" id="callFood" onChange="callFood()" style="width:auto;float: right;">
+						<option>Chọn món ăn </option>
+						@foreach($foods as $tour)
+							<option value="{{$tour['title']}}" @if(isset($_GET['callFood']) && $_GET['callFood']==$tour['title']) selected @endif>{{$tour['title']}}</option>
+						@endforeach
+					</select>
+					<select class="form-control ml-2" name="type" id="callUser" onChange="callUser()" style="width:auto;float: right;">
+						<option>Chọn user </option>
+						@foreach($users as $user)
+							<option value="{{$user['userId']}}" @if(isset($_GET['callUser']) && $_GET['callUser']==$user['userId']) selected @endif>{{$user['email']}}</option>
+						@endforeach
+					</select>
 				</div>
 
 				<!-- <div class="card-body">
@@ -117,7 +117,7 @@
 								<b>Tên</b> : {{$order['order']['ten']}}<br>
 								<b>SĐT</b> : {{$order['order']['sdt']}}<br>
 							</td>
-							<td>{{number_format($order['order']['amount'], 0, ',', '.')}} vnđ</td>
+							<td>{{number_format(getPriceKM($order['order']['amount']), 0, ',', '.')}}đ <br>{{getStrPriceKM($order['order']['amount'])}}</td>
 							<td  class="text-center">
 								@if($order['order']['orderStatus'] == 'Đang giao')
 									<span class="badge badge-light">{{$order['order']['orderStatus']}}</span>

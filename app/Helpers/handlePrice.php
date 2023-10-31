@@ -71,9 +71,9 @@ use Carbon\Carbon;
         function getPriceKM($price)
         {
             $price = (int)$price;
-            if($price >= 10000000 && $price < 50000000) $price = $price - $price*5/100;
-            else if($price >= 50000000 && $price < 100000000) $price = $price - $price*10/100;
-            else if($price >= 100000000) $price = $price - $price*20/100;
+            if($price >= 500000 && $price < 5000000) $price = $price - $price*5/100;
+            else if($price >= 5000000 && $price < 10000000) $price = $price - $price*10/100;
+            else if($price >= 10000000) $price = $price - $price*20/100;
 
             return $price;
         }
@@ -83,9 +83,9 @@ use Carbon\Carbon;
         {
             $price = (int)$price;
             $str = "";
-            if($price >= 10000000 && $price < 50000000) $str = "Đã giảm 5%";
-            else if($price >= 50000000 && $price < 100000000) $str = "Đã giảm 10%";
-            else if($price >= 100000000) $str = "Đã giảm 20%";
+            if($price >= 500000 && $price < 5000000) $str = "Đã giảm 5%";
+            else if($price >= 5000000 && $price < 10000000) $str = "Đã giảm 10%";
+            else if($price >= 10000000) $str = "Đã giảm 20%";
 
             return $str;
         }
