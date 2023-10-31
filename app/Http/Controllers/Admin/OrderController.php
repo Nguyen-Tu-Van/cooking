@@ -34,6 +34,11 @@ class OrderController extends Controller
         foreach ($users as $user) {
             $users_arr[$user->id()] = $user->data();
         }
+        $tours = $this->firestore->collection('products')->documents();
+        $tours_arr = [];
+        foreach ($tours as $tour) {
+            $tours_arr[$tour->id()] = $tour->data();
+        }
 
         $orders_arr = [];
         $money1 = 0;
@@ -43,17 +48,47 @@ class OrderController extends Controller
             $params['id'] = $order->id();
             $params['user'] = $users_arr[$order->data()['userOrder']];
             array_push($orders_arr, $params);
+            
             if($request->has('date') && $request->date == convert_date_3($params['order']['time_payment']))
             {
                 array_push($orders_arr2, $params);
-                $money1+=$params['order']['amount'];
+                $money1+=getPriceKM($params['order']['amount']);
+            }
+            else if($request->has('month') && $request->month == convert_date_4($params['order']['time_payment']))
+            {
+                array_push($orders_arr2, $params);
+                if($params['order']['payment']== 1) $money1+=getPriceKM($params['order']['amount']);
+            }
+            else if($request->has('year') && $request->year == convert_date_5($params['order']['time_payment']))
+            {
+                array_push($orders_arr2, $params);
+                if($params['order']['payment']== 1) $money1+=getPriceKM($params['order']['amount']);
+            }
+            else if($request->has('callUser') && $params['userOrder'] == $request->callUser)
+            {
+                array_push($orders_arr2, $params);
+                if($params['order']['payment']== 1) $money1+=getPriceKM($params['order']['amount']);
+            }
+            else if($request->has('callFood'))
+            {
+                foreach($params['order']['products'] as $item)
+                {
+                    if($item['title']==$request->callFood)
+                    {
+                        array_push($orders_arr2, $params);
+                        $money1+=$item['price']*$item['quantity'];
+                        break;
+                    }
+                }
             }
         }
 
         return view('admin.order.order',[
             'orders' => collect($orders_arr),
             'money' => $money1,
-            'orders1'=> collect($orders_arr2)
+            'orders1'=> collect($orders_arr2),
+            'foods' => collect($tours_arr),
+            'users' => collect($users_arr)
         ]);
     }
 

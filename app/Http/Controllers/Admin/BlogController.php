@@ -88,6 +88,7 @@ class BlogController extends Controller
         $data = $request->validate([
             'type' => 'required',
             'title' => 'required',
+            'time' => 'required',
             'imageUrl' => 'required',
             'description' => 'required',
             'price' => 'required',
@@ -106,6 +107,7 @@ class BlogController extends Controller
             'favoriteId' => $favorite->id(),
             'type' => $request->type,
             'title' => $request->title,
+            'time' => $request->time,
             'imageUrl' => $request->imageUrl,
             'price' => (int)$request->price,
             'ingredient' => $request->ingredient
@@ -179,6 +181,7 @@ class BlogController extends Controller
         $data = $request->validate([
             'type' => 'required',
             'title' => 'required',
+            'time' => 'required',
             'imageUrl' => 'required',
             'description' => 'required',
             'price' => 'required',
@@ -190,6 +193,7 @@ class BlogController extends Controller
             'description' => $request->description,
             'type' => $request->type,
             'title' => $request->title,
+            'time' => $request->time,
             'imageUrl' => $request->imageUrl,
             'price' => (int)$request->price,
             'ingredient' => $request->ingredient

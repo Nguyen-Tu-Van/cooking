@@ -70,13 +70,15 @@
 								<b>Món ăn :</b> {{$tour['title']}}
 								<br>
 								<b>Thể loại</b> : {{$tour['type']}}
+								<br>
+								<b>Thời gian nấu</b> : {{$tour['time']??''}}
 							</td>
 							<td style="width:150px">{{number_format($tour['price'], 0, ',', '.')}} vnđ</td>
 							<td style="text-align: justify;">
 								<textarea class="form-control" rows="5" name="description" readonly>{{$tour['description']}}</textarea>
 							</td>
 							<td style="text-align: justify;">
-								<textarea class="form-control" style="width:200px" rows="5" name="ingredient" readonly>{{$tour['ingredient']}}</textarea>
+								<textarea class="form-control" style="width:200px" rows="5" name="ingredient" readonly>{{$tour['ingredient']??''}}</textarea>
 							</td>
 							<td class="text-center">
 								<div class="btn-group">

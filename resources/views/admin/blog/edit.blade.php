@@ -88,6 +88,12 @@
                                     <input type="text" class="form-control" name="title" value="{{$tour['title']}}">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Thời gian nấu <span class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" name="time" value="{{$tour['time']}}">
+                                </div>
+                            </div>
 							<div class="form-group row">
                                 <label class="col-form-label col-lg-2">Chọn hình ảnh <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">

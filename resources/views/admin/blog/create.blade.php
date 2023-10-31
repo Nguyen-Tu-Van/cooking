@@ -91,6 +91,12 @@
                                     <input type="text" class="form-control" name="title" value="{{old('title')??''}}">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Thời gian nấu <span class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" name="time" value="{{old('time')??''}}">
+                                </div>
+                            </div>
 							<div class="form-group row">
                                 <label class="col-form-label col-lg-2">Image Url  <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">

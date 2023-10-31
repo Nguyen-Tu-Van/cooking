@@ -247,4 +247,42 @@
     //         else return false;
     //     }
     // }
+    if (!function_exists('convert_date_4')) {
+        function convert_date_4($timestamp)
+        {
+            if($timestamp == "")
+            {
+                return "";
+            }
+            try {
+                $date = new DateTime($timestamp);
+
+                // Format the DateTime object as required
+                $formattedDate = $date->format('m/Y');
+    
+                return $formattedDate;
+            } catch (\Throwable $th) {
+                return $timestamp;
+            }
+        }
+    }
+    if (!function_exists('convert_date_5')) {
+        function convert_date_5($timestamp)
+        {
+            if($timestamp == "")
+            {
+                return "";
+            }
+            try {
+                $date = new DateTime($timestamp);
+
+                // Format the DateTime object as required
+                $formattedDate = $date->format('Y');
+    
+                return $formattedDate;
+            } catch (\Throwable $th) {
+                return $timestamp;
+            }
+        }
+    }
 ?>

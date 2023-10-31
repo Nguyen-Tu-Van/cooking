@@ -44,16 +44,46 @@
 			<!-- Table with togglable columns -->
 			<div class="card">
 				<div class="card-header">
-					@if(isset($_GET['date']))
-						<h1 class="card-title float-left">Doanh thu {{$_GET['date']}} là {{number_format($money, 0, ',', '.')}} vnđ</h1>
+					@if(isset($_GET['date']) || isset($_GET['callUser']))
+						<h1 class="card-title float-left">Doanh thu {{$_GET['date']??''}} là {{number_format($money, 0, ',', '.')}} vnđ</h1>
+					@elseif(isset($_GET['callFood']))
+						<h1 class="card-title float-left">Doanh thu {{$_GET['callFood']??''}} là {{number_format($money, 0, ',', '.')}} vnđ</h1>
+					@elseif(isset($_GET['month']))
+						<h1 class="card-title float-left">Doanh thu {{$_GET['month']??''}} là {{number_format($money, 0, ',', '.')}} vnđ</h1>
+					@elseif(isset($_GET['year']))
+						<h1 class="card-title float-left">Doanh thu {{$_GET['year']??''}} là {{number_format($money, 0, ',', '.')}} vnđ</h1>
+					@elseif(isset($_GET['callFood']))
+						<h1 class="card-title float-left">Doanh thu tổng là {{number_format($money, 0, ',', '.')}} vnđ</h1>
 					@else
 						<h1 class="card-title float-left">Danh sách đơn đặt hàng</h1>
 					@endif
-					<form class="float-right" style="display: flex;" action="{{route('orders.index')}}" method="get">
-						<input type="date" class="form-control mr-2" name="date" value="{{$_GET['date']??''}}">
-						<button type="submit" class="btn btn-primary btn-sm" style="width:120px"><i class="icon-filter3"></i> Filter</button>
-					</form>
+					<select class="form-control mr-2" name="type" id="callFood" onChange="callFood()" style="width:auto;float: right;">
+						<option>Chọn món ăn </option>
+						@foreach($foods as $tour)
+							<option value="{{$tour['title']}}" @if(isset($_GET['callFood']) && $_GET['callFood']==$tour['title']) selected @endif>{{$tour['title']}}</option>
+						@endforeach
+					</select>
+					<select class="form-control mr-2" name="type" id="callUser" onChange="callUser()" style="width:auto;float: right;">
+						<option>Chọn user </option>
+						@foreach($users as $user)
+							<option value="{{$user['userId']}}" @if(isset($_GET['callUser']) && $_GET['callUser']==$user['userId']) selected @endif>{{$user['email']}}</option>
+						@endforeach
+					</select>
 					<!-- <a href="{{route('foods.create')}}" class="btn btn-primary btn-sm float-right"><i class="icon-plus22"></i> Add</a> -->
+				</div>
+				<div style="display: flex;">
+					<form class="ml-2" action="{{route('orders.index')}}" method="get">
+						<input type="date" class="form-control mr-2" name="date" value="{{$_GET['date']??''}}">
+						<button type="submit" class="btn btn-primary btn-sm mt-2" style="width:120px"><i class="icon-filter3"></i> Filter</button>
+					</form>
+					<form class="ml-2" action="{{route('orders.index')}}" method="get">
+						<input type="text" class="form-control mr-2" id="dateInput" name="month" pattern="\d{2}/\d{4}" placeholder="mm/yyyy" value="{{$_GET['month']??''}}">
+						<button type="submit" class="btn btn-primary btn-sm mt-2" style="width:120px"><i class="icon-filter3"></i> Filter</button>
+					</form>
+					<form class="ml-2" action="{{route('orders.index')}}" method="get">
+						<input type="text" class="form-control mr-2" id="yearInput" name="year" pattern="[0-9]{4}" placeholder="yyyy" value="{{$_GET['year']??''}}">
+						<button type="submit" class="btn btn-primary btn-sm mt-2" style="width:120px"><i class="icon-filter3"></i> Filter</button>
+					</form>
 				</div>
 
 				<!-- <div class="card-body">
@@ -74,7 +104,7 @@
 					</thead>
 					<tbody>
 						@php
-							if(isset($_GET['date']))
+							if(isset($_GET['date']) || isset($_GET['callFood']) || isset($_GET['callUser']) || isset($_GET['month']) || isset($_GET['year']))
 							{
 								$orders = $orders1;
 							}
@@ -104,7 +134,7 @@
 							</td>
 							<td>
 								@foreach($order['order']['products'] as $address)
-								<div style="display: flex;">
+								<div style="display: flex;margin-top:2px">
 									<div>
 										<img width="80" src="{{$address['imageUrl']}}" /> 
 									</div>
@@ -256,5 +286,29 @@
 		}
 		document.getElementById('orderId').value = id;
 	}
+
+	function callFood()
+	{
+		let currentUrl = window.location.href;
+		// Create a URL object
+		let url = new URL(currentUrl);
+
+		// Get the domain (including port)
+		let domain = url.origin+url.pathname;
+
+		location.href = domain+'?callFood='+document.getElementById('callFood').value;
+	}
+	function callUser()
+	{
+		let currentUrl = window.location.href;
+		// Create a URL object
+		let url = new URL(currentUrl);
+
+		// Get the domain (including port)
+		let domain = url.origin+url.pathname;
+
+		location.href = domain+'?callUser='+document.getElementById('callUser').value;
+	}
+
 </script>
 @endsection
