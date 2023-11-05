@@ -175,6 +175,7 @@
                                 Duyệt
                             </label>
                         </div>
+                        @if(isset($tour['reports']))
                         @foreach($tour['reports'] as $key => $item)
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2"> {{$item['email']}}</label>
@@ -204,6 +205,7 @@
                             </label>
                         </div>
                         @endforeach
+                        @endif
                     </form>
                 </div>
             </div>
