@@ -44,6 +44,12 @@ class BlogController extends Controller
             array_push($tours, $params);
         }
 
+        $usersx = $this->firestore->collection('users')->documents();
+        $users = [];
+        foreach ($usersx as $document) {
+            $users[$document->id()] = $document->data();
+        }
+
         $favorites = $this->firestore->collection('favorites')->documents();
         $favorites_arr = [];
         foreach ($favorites as $user) {
@@ -52,6 +58,7 @@ class BlogController extends Controller
 
         return view('admin.blog.blog',[
             'tours' => collect($tours),
+            'users' => collect($users),
             'favorites_arr' => $favorites_arr
         ]);
     }

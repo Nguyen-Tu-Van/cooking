@@ -49,7 +49,7 @@
 						<tr>
 							<th>#</th>
 							<th>Hình ảnh</th>
-							<th>Tên món ăn</th>
+							<th>Thông tin món ăn</th>
 							<th data-breakpoints="xs sm md">Giá</th>
 							<th data-breakpoints="xs sm">Mô tả món ăn</th>
 							<th data-breakpoints="xs sm">Nguyên liệu</th>
@@ -66,12 +66,20 @@
 								</div>
 								<img width="250px" src="{{$tour['imageUrl']}}"/>
 							</td>
-							<td style="width:220px">
+							<td style="width:250px">
 								<b>Món ăn :</b> {{$tour['title']}}
 								<br>
 								<b>Thể loại</b> : {{$tour['type']}}
 								<br>
 								<b>Thời gian nấu</b> : {{$tour['time']??''}}
+								<br>
+								<b>Người đăng</b> : {{$users[$tour['creatorId']]['email']??''}}
+								<br>
+								@if(isset($users[$tour['creatorId']]['admin']) && $users[$tour['creatorId']]['admin']==1)
+								<span class="badge badge-success">Is_Admin</span>
+								@else 
+								<span class="badge badge-light">Is_User</span>
+								@endif
 							</td>
 							<td style="width:150px">{{number_format($tour['price'], 0, ',', '.')}} vnđ</td>
 							<td style="text-align: justify;">
