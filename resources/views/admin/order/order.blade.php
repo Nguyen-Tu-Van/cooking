@@ -145,6 +145,7 @@
 								@endforeach
 							</td>
 							<td>
+								Địa chỉ giao hàng : {{$order['order']['address']}}
 								<span class="badge badge-success mt-1">Thanh toán lúc {{convert_date($order['order']['time_payment'])}}</span> 
 							</td>
 							<td class="text-right">
