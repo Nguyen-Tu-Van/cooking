@@ -120,18 +120,23 @@
                                     <textarea class="form-control" rows="5" name="description">{{$tour['description']}}</textarea>
                                 </div>
                             </div>
+                            @if($tour['price'] >= 0)
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Giá <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">
-                                <input type="number" class="form-control" name="price" value="{{$tour['price']}}">
+                                <input type="number" class="form-control" name="price" value="{{$tour['price']}}" min="0">
                                 </div>
                             </div>
+                            @else
+                            <input type="hidden" class="form-control" name="price" value="-1">
+                            @endif
                         </fieldset>
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-success"><i class="icon-arrow-right15"></i> Cập nhật</button>
                         </div>
-                        @if(isset($comment_arr[$id]))
+                    </form>
+                    @if(isset($comment_arr[$id]))
                             <hr>
                             <h5 class="card-title">Nội dung bình luận</h5>
                             <div class="form-group row">
@@ -206,7 +211,6 @@
                         </div>
                         @endforeach
                         @endif
-                    </form>
                 </div>
             </div>
             <!-- /form inputs -->

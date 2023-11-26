@@ -126,7 +126,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Giá <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">
-                                <input type="number" class="form-control" name="price" value="{{old('price')??''}}">
+                                <input type="number" class="form-control" name="price" value="{{old('price')??''}}" min="0">
                                 </div>
                             </div>
                         </fieldset>

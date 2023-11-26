@@ -196,7 +196,6 @@ class BlogController extends Controller
         ]);
         $collection = $this->firestore->collection('products')->document($id);
         $params = [
-            'creatorId' => Session::get('user')['userId'],
             'description' => $request->description,
             'type' => $request->type,
             'title' => $request->title,

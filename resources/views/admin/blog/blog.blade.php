@@ -81,7 +81,9 @@
 								<span class="badge badge-light">Is_User</span>
 								@endif
 							</td>
-							<td style="width:150px">{{number_format($tour['price'], 0, ',', '.')}} vnđ</td>
+							<td style="width:150px">
+							@if($tour['price'] >= 0)
+							{{number_format($tour['price'], 0, ',', '.')}} vnđ @endif</td>
 							<td style="text-align: justify;">
 								<textarea class="form-control" rows="5" name="description" readonly>{{$tour['description']}}</textarea>
 							</td>
