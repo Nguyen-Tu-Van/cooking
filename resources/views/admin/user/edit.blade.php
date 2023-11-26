@@ -64,6 +64,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-form-label col-lg-3">Tên <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="name" value="{{$user['name']??''}}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="custom-control custom-checkbox col-lg-3 pl-2">
                                         <label class="col-form-label">New Password</label>
                                         <input type="checkbox" class="custom-control-input" id="cc_li_u" name="check_password">
@@ -71,6 +77,19 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" name="newPassword" id="password" disabled placeholder="Mật khẩu mới">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-lg-3">Giới tính <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9 pt-2">
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" name="gender" value="1" @if(isset($user['gender']) && $user['gender'] == '1') checked @endif >
+                                            <span class="custom-control-label">Name</span>
+                                        </label>
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" name="gender" value="0" @if(isset($user['gender']) && $user['gender'] == '0') checked @endif >
+                                            <span class="custom-control-label">Nữ</span>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">

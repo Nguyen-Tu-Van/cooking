@@ -115,6 +115,8 @@ class UserController extends Controller
             // Tạo một mảng dữ liệu mới với userId giống với id của tài liệu.
             $params = [
                 'email' => $request->email,
+                'name' => $request->name,
+                'gender' => $request->gender == "1" ? "1" : "0",
                 'admin' => $request->status == "1" ? true : false,
                 'orders' => '',
                 'userId' => $user->uid,
@@ -190,6 +192,8 @@ class UserController extends Controller
 
         // Sử dụng phương thức update để cập nhật dữ liệu của tài liệu.
         $userRef->set(['admin' => $request->status == "1" ? true : false], ['merge' => true]);
+        $userRef->set(['gender' => $request->gender??'0'], ['merge' => true]);
+        $userRef->set(['name' => $request->name], ['merge' => true]);
         
         return redirect()->back()->with('success','Success');
     }

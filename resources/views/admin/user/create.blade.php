@@ -64,9 +64,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-form-label col-lg-3">Tên <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="name" value="{{old('name')??''}}" require>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-form-label col-lg-3">Password <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <input type="" class="form-control" name="password" value="{{old('password')??''}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-lg-3">Giới tính <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9 pt-2">
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" name="gender" value="1" checked="">
+                                            <span class="custom-control-label">Nam</span>
+                                        </label>
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" name="gender" value="0">
+                                            <span class="custom-control-label">Nữ</span>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">

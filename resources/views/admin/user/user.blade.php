@@ -50,6 +50,8 @@
 							<th data-breakpoints="xs sm">STT</th>
 							<th data-breakpoints="xs sm">Avatar</th>
 							<th data-breakpoints="xs sm">Email</th>
+							<th data-breakpoints="xs sm">Tên</th>
+							<th data-breakpoints="xs sm">Giới tính</th>
 							<th data-breakpoints="xs sm md">Tài khoản</th>
 							<th data-breakpoints="xs sm md" style="visibility: hidden;"></th>
 							<th class="text-center" style="width: 30px;">Thao tác</th>
@@ -66,6 +68,22 @@
 							</td>
 							<td>
 								{{$user['email']}}
+							</td>
+							<td>
+								@if(isset($user['name']) && $user['name'] != "")
+									<span class="badge badge-dark">{{$user['name']}}</span>
+								@else
+									<span class="badge badge-light">___</span>
+								@endif
+							</td>
+							<td>
+								@if(isset($user['gender']) && $user['gender'] == '1')
+									<span class="badge badge-dark">Nam</span>
+								@elseif(isset($user['gender']) && $user['gender'] == '0')
+									<span class="badge badge-dark">Nữ</span>
+								@else
+									<span class="badge badge-light">___</span>
+								@endif
 							</td>
 							<td>
 								@if($user['admin'] == true)
