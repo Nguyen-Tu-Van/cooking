@@ -104,7 +104,7 @@
                                 <label class="col-form-label col-lg-2">Ảnh minh họa</label>
                                 <div class="col-lg-10">
                                     <div>
-                                        <img class="w-100" id="outputImg" src="{{$tour['imageUrl']}}" alt=""/>
+                                        <img class="w-50" id="outputImg" src="{{$tour['imageUrl']}}" alt=""/>
                                     </div>
                                 </div>
                             </div>

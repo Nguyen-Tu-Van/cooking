@@ -57,17 +57,17 @@ class OrderController extends Controller
             else if($request->has('month') && $request->month == convert_date_4($params['order']['time_payment']))
             {
                 array_push($orders_arr2, $params);
-                if($params['order']['payment']== 1) $money1+=getPriceKM($params['order']['amount']);
+                if($params['order']['payment']== 1 && $params['order']['orderStatus']!="Đã hủy") $money1+=getPriceKM($params['order']['amount']);
             }
             else if($request->has('year') && $request->year == convert_date_5($params['order']['time_payment']))
             {
                 array_push($orders_arr2, $params);
-                if($params['order']['payment']== 1) $money1+=getPriceKM($params['order']['amount']);
+                if($params['order']['payment']== 1 && $params['order']['orderStatus']!="Đã hủy") $money1+=getPriceKM($params['order']['amount']);
             }
             else if($request->has('callUser') && $params['userOrder'] == $request->callUser)
             {
                 array_push($orders_arr2, $params);
-                if($params['order']['payment']== 1) $money1+=getPriceKM($params['order']['amount']);
+                if($params['order']['payment']== 1  && $params['order']['orderStatus']!="Đã hủy") $money1+=getPriceKM($params['order']['amount']);
             }
             else if($request->has('callFood'))
             {

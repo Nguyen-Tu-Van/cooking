@@ -57,10 +57,10 @@ class DashboardController extends Controller
             if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đang giao') $status1++;
             if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã giao') $status2++;
             if(isset($params['order']['orderStatus']) && $params['order']['orderStatus'] == 'Đã hủy') $status3++;
-            if(isset($params['order']['payment']) && $params['order']['payment'] == 1) $money1+=getPriceKM($params['order']['amount']);
-            if(isset($params['order']['payment']) && $params['order']['payment'] == 1 && $currentDateTime == convert_date_3($params['order']['time_payment'])) $money2+=getPriceKM($params['order']['amount']);
-            if(isset($params['order']['payment']) && $params['order']['payment'] == 1 && $currentDateTime2 == convert_date_3_month($params['order']['time_payment'])) $money3+=getPriceKM($params['order']['amount']);
-            if(isset($params['order']['payment']) && $params['order']['payment'] == 1 && $currentDateTime3 == convert_date_3_year($params['order']['time_payment'])) $money4+=getPriceKM($params['order']['amount']);
+            if(isset($params['order']['payment'])  && $params['order']['orderStatus']!="Đã hủy" && $params['order']['payment'] == 1) $money1+=getPriceKM($params['order']['amount']);
+            if(isset($params['order']['payment'])  && $params['order']['orderStatus']!="Đã hủy" && $params['order']['payment'] == 1 && $currentDateTime == convert_date_3($params['order']['time_payment'])) $money2+=getPriceKM($params['order']['amount']);
+            if(isset($params['order']['payment'])  && $params['order']['orderStatus']!="Đã hủy" && $params['order']['payment'] == 1 && $currentDateTime2 == convert_date_3_month($params['order']['time_payment'])) $money3+=getPriceKM($params['order']['amount']);
+            if(isset($params['order']['payment'])  && $params['order']['orderStatus']!="Đã hủy" && $params['order']['payment'] == 1 && $currentDateTime3 == convert_date_3_year($params['order']['time_payment'])) $money4+=getPriceKM($params['order']['amount']);
         }
 
         return view('admin.pages.index',[
