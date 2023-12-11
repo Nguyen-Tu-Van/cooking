@@ -52,7 +52,7 @@ class OrderController extends Controller
             if($request->has('date') && $request->date == convert_date_3($params['order']['time_payment']))
             {
                 array_push($orders_arr2, $params);
-                $money1+=getPriceKM($params['order']['amount']);
+                if($params['order']['orderStatus']!="Đã hủy") $money1+=getPriceKM($params['order']['amount']);
             }
             else if($request->has('month') && $request->month == convert_date_4($params['order']['time_payment']))
             {
@@ -76,7 +76,7 @@ class OrderController extends Controller
                     if($item['title']==$request->callFood)
                     {
                         array_push($orders_arr2, $params);
-                        $money1+=$item['price']*$item['quantity'];
+                        if($params['order']['orderStatus']!="Đã hủy") $money1+=$item['price']*$item['quantity'];
                         break;
                     }
                 }
